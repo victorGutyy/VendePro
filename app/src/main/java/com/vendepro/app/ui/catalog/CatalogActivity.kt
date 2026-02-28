@@ -25,10 +25,24 @@ class CatalogActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[ProductViewModel::class.java]
 
         adapter = ProductAdapter(
-            onShare         = { p -> ShareHelper.generateProductCard(this, p)?.let { ShareHelper.shareGeneral(this, it, ShareHelper.buildProductText(p)) } },
-            onDelete        = { p -> viewModel.delete(p) },
-            onSharePersonal = { p -> ShareHelper.generateProductCard(this, p)?.let { ShareHelper.shareToWhatsApp(this, it, ShareHelper.buildProductText(p)) } }
+            onShare = { p ->
+                ShareHelper.generateProductCard(this, p)?.let { cardUri ->
+                    ShareHelper.shareGeneral(this, cardUri, ShareHelper.buildProductText(p))
+                }
+            },
+            onDelete = { p ->
+                viewModel.delete(p)
+            },
+            onSharePersonal = { p ->
+                val uri = ShareHelper.filePathToUri(this, p.imagePath1)
+                if (uri == null) {
+                    Toast.makeText(this, "No se encontró la foto del producto", Toast.LENGTH_SHORT).show()
+                    return@ProductAdapter
+                }
+                ShareHelper.shareToWhatsAppPersonal(this, listOf(uri), ShareHelper.buildProductText(p))
+            }
         )
+
         binding.rvProducts.layoutManager = GridLayoutManager(this, 2)
         binding.rvProducts.adapter = adapter
 

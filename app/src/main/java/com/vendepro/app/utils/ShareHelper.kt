@@ -19,8 +19,20 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.ArrayList
 
 object ShareHelper {
+
+    fun filePathToUri(context: Context, path: String): Uri? {
+        if (path.isBlank()) return null
+        val file = File(path)
+        if (!file.exists()) return null
+        return FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.fileprovider",
+            file
+        )
+    }
 
     fun generateProductCard(context: Context, product: Product): Uri? {
         val w = 1080
@@ -91,10 +103,10 @@ object ShareHelper {
         val imgTop    = 180f
         val imgBottom = 780f
 
-        if (p.imagePath.isNotEmpty()) {
-            val imageFile = File(p.imagePath)
+        if (p.imagePath1.isNotEmpty()) {
+            val imageFile = File(p.imagePath1)
             if (imageFile.exists()) {
-                val srcBmp = BitmapFactory.decodeFile(p.imagePath)
+                val srcBmp = BitmapFactory.decodeFile(p.imagePath1)
                 if (srcBmp != null) {
                     val scaled = Bitmap.createScaledBitmap(srcBmp, w, (imgBottom - imgTop).toInt(), true)
                     canvas.drawBitmap(scaled, 0f, imgTop, null)
@@ -177,10 +189,10 @@ object ShareHelper {
         bgPaint.color = Color.parseColor("#1A1A2E")
         canvas.drawRect(left.toFloat(), top.toFloat(), (left + w).toFloat(), (top + h).toFloat(), bgPaint)
 
-        if (p.imagePath.isNotEmpty()) {
-            val imageFile = File(p.imagePath)
+        if (p.imagePath1.isNotEmpty()) {
+            val imageFile = File(p.imagePath1)
             if (imageFile.exists()) {
-                val srcBmp = BitmapFactory.decodeFile(p.imagePath)
+                val srcBmp = BitmapFactory.decodeFile(p.imagePath1)
                 if (srcBmp != null) {
                     val scaled = Bitmap.createScaledBitmap(srcBmp, w, h - 120, true)
                     canvas.drawBitmap(scaled, left.toFloat(), top.toFloat(), null)
@@ -338,5 +350,20 @@ object ShareHelper {
         val fmt  = NumberFormat.getCurrencyInstance(Locale("es", "CO"))
         val date = SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale("es", "CO")).format(Date(p.uploadedAt))
         return "Emprendimiento: ${p.businessName}\n\nProducto: ${p.productName}\n${p.description}\n\nPrecio: ${fmt.format(p.price)}\nVendedor: ${p.sellerName}\nContacto: ${p.contactNumber}\n\nNequi: ${p.nequiAccount}\nDaviplata: ${p.daviplataAccount}\n\nFecha: $date"
+    }
+
+    fun shareToWhatsAppPersonal(
+        context: Context,
+        imageUris: List<Uri>,
+        text: String
+    ) {
+        val intent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
+            type = "image/*"
+            putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(imageUris))
+            putExtra(Intent.EXTRA_TEXT, text)
+            setPackage("com.whatsapp")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        context.startActivity(intent)
     }
 }

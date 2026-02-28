@@ -99,7 +99,7 @@ class AddProductActivity : AppCompatActivity() {
             contactNumber    = binding.etContact.text.toString().trim(),
             nequiAccount     = binding.etNequi.text.toString().trim(),
             daviplataAccount = binding.etDaviplata.text.toString().trim(),
-            imagePath        = currentPhotoPath
+            imagePath1        = currentPhotoPath
         ))
         toast("✅ Producto guardado")
         finish()

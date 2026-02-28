@@ -36,7 +36,7 @@ class ProductAdapter(
             b.tvPrice.text       = NumberFormat.getCurrencyInstance(Locale("es","CO")).format(p.price)
             b.tvDate.text        = SimpleDateFormat("dd/MM/yy hh:mm a", Locale("es","CO")).format(Date(p.uploadedAt))
 
-            val file = File(p.imagePath)
+            val file = File(p.imagePath1)
             if (file.exists())
                 Glide.with(b.root).load(file).centerCrop().placeholder(R.drawable.ic_product_placeholder).into(b.ivProduct)
             else

@@ -18,6 +18,11 @@ data class Product(
     val contactNumber: String,
     val nequiAccount: String,
     val daviplataAccount: String,
-    val imagePath: String,
+    // 4 fotos
+    val imagePath1: String,
+    val imagePath2: String = "",
+    val imagePath3: String = "",
+    val imagePath4: String = "",
+
     val uploadedAt: Long = System.currentTimeMillis()
 ) : Parcelable
