@@ -23,6 +23,39 @@ import java.util.ArrayList
 
 object ShareHelper {
 
+    fun getProductImageUris(context: Context, p: Product): List<Uri> {
+        return listOfNotNull(
+            filePathToUri(context, p.imagePath1),
+            filePathToUri(context, p.imagePath2),
+            filePathToUri(context, p.imagePath3),
+            filePathToUri(context, p.imagePath4),
+        )
+    }
+
+    fun shareProductToClient(context: Context, p: Product) {
+        val cardUri = generateProductCard(context, p)
+        val photoUris = getProductImageUris(context, p)
+
+        val allUris = buildList {
+            if (cardUri != null) add(cardUri)
+            addAll(photoUris)
+        }
+
+        if (allUris.isEmpty()) return
+
+        shareMultipleGeneral(context, allUris, buildProductText(p))
+    }
+
+    fun shareMultipleGeneral(context: Context, uris: List<Uri>, text: String) {
+        val intent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
+            type = "image/*"
+            putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
+            putExtra(Intent.EXTRA_TEXT, text)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        context.startActivity(Intent.createChooser(intent, "Compartir producto..."))
+    }
+
     fun filePathToUri(context: Context, path: String): Uri? {
         if (path.isBlank()) return null
         val file = File(path)

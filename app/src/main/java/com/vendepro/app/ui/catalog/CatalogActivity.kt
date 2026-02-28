@@ -2,7 +2,6 @@ package com.vendepro.app.ui.catalog
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,14 +33,9 @@ class CatalogActivity : AppCompatActivity() {
                 viewModel.delete(p)
             },
             onSharePersonal = { p ->
-                val uri = ShareHelper.filePathToUri(this, p.imagePath1)
-                if (uri == null) {
-                    Toast.makeText(this, "No se encontró la foto del producto", Toast.LENGTH_SHORT).show()
-                    return@ProductAdapter
-                }
-                ShareHelper.shareToWhatsAppPersonal(this, listOf(uri), ShareHelper.buildProductText(p))
+                ShareHelper.shareProductToClient(this, p)
             }
-        )
+        ) // ✅ ESTE PARÉNTESIS TE FALTABA
 
         binding.rvProducts.layoutManager = GridLayoutManager(this, 2)
         binding.rvProducts.adapter = adapter
@@ -59,15 +53,18 @@ class CatalogActivity : AppCompatActivity() {
         }
         binding.btnShareCatalog.setOnClickListener {
             val prods = viewModel.products.value ?: return@setOnClickListener
-            ShareHelper.generateCatalogCard(this, prods)?.let { ShareHelper.shareGeneral(this, it, "Catálogo disponible") }
+            ShareHelper.generateCatalogCard(this, prods)
+                ?.let { ShareHelper.shareGeneral(this, it, "Catálogo disponible") }
         }
         binding.btnShareWhatsApp.setOnClickListener {
             val prods = viewModel.products.value ?: return@setOnClickListener
-            ShareHelper.generateCatalogCard(this, prods)?.let { ShareHelper.shareToWhatsApp(this, it, "🛍️ Catálogo") }
+            ShareHelper.generateCatalogCard(this, prods)
+                ?.let { ShareHelper.shareToWhatsApp(this, it, "🛍️ Catálogo") }
         }
         binding.btnShareInstagram.setOnClickListener {
             val prods = viewModel.products.value ?: return@setOnClickListener
-            ShareHelper.generateCatalogCard(this, prods)?.let { ShareHelper.shareToInstagram(this, it) }
+            ShareHelper.generateCatalogCard(this, prods)
+                ?.let { ShareHelper.shareToInstagram(this, it) }
         }
         binding.btnSettings.setOnClickListener {
             startActivity(Intent(this, BusinessConfigActivity::class.java))

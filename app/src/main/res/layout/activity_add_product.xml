@@ -13,6 +13,7 @@
         android:orientation="vertical"
         android:paddingBottom="40dp">
 
+        <!-- HEADER FOTO -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -39,6 +40,20 @@
                 android:src="@drawable/ic_arrow_back"
                 android:tint="#FFFFFF"
                 android:contentDescription="Volver"/>
+
+            <!-- CONTADOR 0/4 -->
+            <TextView
+                android:id="@+id/tvPhotoCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="14dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:text="0/4"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/circle_bg"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -69,6 +84,126 @@
             </LinearLayout>
         </FrameLayout>
 
+        <!-- MINIATURAS 1..4 -->
+        <LinearLayout
+            android:id="@+id/layoutThumbs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center"
+            android:background="@color/colorBackground">
+
+            <!-- Slot 1 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp">
+
+                <ImageView
+                    android:id="@+id/ivThumb1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="#1A1A2E"
+                    android:contentDescription="Foto 1"/>
+
+                <ImageButton
+                    android:id="@+id/btnDel1"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/ic_delete"
+                    android:tint="#FFFFFF"
+                    android:contentDescription="Borrar foto 1"/>
+            </FrameLayout>
+
+            <!-- Slot 2 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp">
+
+                <ImageView
+                    android:id="@+id/ivThumb2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="#1A1A2E"
+                    android:contentDescription="Foto 2"/>
+
+                <ImageButton
+                    android:id="@+id/btnDel2"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/ic_delete"
+                    android:tint="#FFFFFF"
+                    android:contentDescription="Borrar foto 2"/>
+            </FrameLayout>
+
+            <!-- Slot 3 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp">
+
+                <ImageView
+                    android:id="@+id/ivThumb3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="#1A1A2E"
+                    android:contentDescription="Foto 3"/>
+
+                <ImageButton
+                    android:id="@+id/btnDel3"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/ic_delete"
+                    android:tint="#FFFFFF"
+                    android:contentDescription="Borrar foto 3"/>
+            </FrameLayout>
+
+            <!-- Slot 4 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/ivThumb4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="#1A1A2E"
+                    android:contentDescription="Foto 4"/>
+
+                <ImageButton
+                    android:id="@+id/btnDel4"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/ic_delete"
+                    android:tint="#FFFFFF"
+                    android:contentDescription="Borrar foto 4"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <!-- FORMULARIO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,6 +227,7 @@
                 app:boxStrokeColor="@color/colorPrimary"
                 app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etBusinessName"
                     android:layout_width="match_parent"
@@ -123,6 +259,7 @@
                 app:boxStrokeColor="@color/colorPrimary"
                 app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etProductName"
                     android:layout_width="match_parent"
@@ -139,6 +276,7 @@
                 app:boxStrokeColor="@color/colorPrimary"
                 app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDescription"
                     android:layout_width="match_parent"
@@ -157,6 +295,7 @@
                 app:boxStrokeColor="@color/colorPrimary"
                 app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSellerName"
                     android:layout_width="match_parent"
@@ -174,6 +313,7 @@
                 app:hintTextColor="@color/colorPrimary"
                 app:prefixText="$"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPrice"
                     android:layout_width="match_parent"
@@ -205,6 +345,7 @@
                 app:boxStrokeColor="@color/colorPrimary"
                 app:hintTextColor="@color/colorPrimary"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etContact"
                     android:layout_width="match_parent"
@@ -221,6 +362,7 @@
                 app:boxStrokeColor="#7B2D8B"
                 app:hintTextColor="#7B2D8B"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNequi"
                     android:layout_width="match_parent"
@@ -237,6 +379,7 @@
                 app:boxStrokeColor="#F5A623"
                 app:hintTextColor="#F5A623"
                 android:layout_marginBottom="20dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDaviplata"
                     android:layout_width="match_parent"
