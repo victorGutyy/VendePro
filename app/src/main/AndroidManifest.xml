@@ -16,18 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VendePro">
 
-        <activity android:name=".MainActivity" android:exported="true">
+        <activity android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.VendePro"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.admin.AddProductActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ui.admin.BusinessConfigActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ui.catalog.CatalogActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

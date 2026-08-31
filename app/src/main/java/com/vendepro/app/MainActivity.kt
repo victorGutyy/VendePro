@@ -1,14 +1,20 @@
 package com.vendepro.app
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.vendepro.app.ui.catalog.CatalogActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import com.vendepro.app.ui.navigation.VendeProNavHost
+import com.vendepro.app.ui.theme.VendeProTheme
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this, CatalogActivity::class.java))
-        finish()
+        enableEdgeToEdge()
+        setContent {
+            VendeProTheme {
+                VendeProNavHost()
+            }
+        }
     }
 }

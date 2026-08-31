@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF6B35</color>
-    <color name="colorPrimaryDark">#E85D2A</color>
-    <color name="colorAccent">#F7931E</color>
-    <color name="colorBackground">#0D0D0D</color>
-    <color name="colorSurface">#1A1A2E</color>
-    <color name="colorSurface2">#16213E</color>
-    <color name="colorOnSurface">#FFFFFF</color>
-    <color name="colorOnSurfaceSecondary">#AAAAAA</color>
-    <color name="colorNequi">#7B2D8B</color>
-    <color name="colorDaviplata">#F5A623</color>
+    <!-- Identidad "Hustle Neón" — usada por el tema base de la ventana
+         antes de que Compose tome control (ver ui/theme/Theme.kt). -->
+    <color name="colorBackground">#0D0B19</color>
+    <color name="colorLime">#ABF201</color>
 </resources>
