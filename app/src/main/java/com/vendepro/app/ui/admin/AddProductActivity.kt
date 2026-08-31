@@ -213,6 +213,12 @@ class AddProductActivity : AppCompatActivity() {
             return
         }
 
+        val price = priceText.toDoubleOrNull()
+        if (price == null || price <= 0.0) {
+            toast("Ingresa un precio válido mayor a 0")
+            return
+        }
+
         if (imagePaths[0].isBlank()) {
             toast("Agrega mínimo 1 foto (Foto 1)")
             return
@@ -224,7 +230,7 @@ class AddProductActivity : AppCompatActivity() {
                 productName      = productName,
                 description      = binding.etDescription.text.toString().trim(),
                 sellerName       = binding.etSellerName.text.toString().trim(),
-                price            = priceText.toDoubleOrNull() ?: 0.0,
+                price            = price,
                 contactNumber    = binding.etContact.text.toString().trim(),
                 nequiAccount     = binding.etNequi.text.toString().trim(),
                 daviplataAccount = binding.etDaviplata.text.toString().trim(),
